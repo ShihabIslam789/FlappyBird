@@ -94,6 +94,15 @@ window.onload = function() {
             }
         }
 
+        //score
+        context.fillstyle = "white";
+        context.font = "45px sans-serif";
+        context.fillText(score, 5, 45);
+
+        if(gameOver) {
+            context.fillText("Game Over",5,90)
+        }
+
     }
 
     function placePipes() {
