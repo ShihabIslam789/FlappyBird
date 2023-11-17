@@ -17,8 +17,14 @@ let bird = {
     y : birdY,
     width : birdWidth,
     height : birdHeight
-
 }
+
+//pipes
+let pipeArray = [];
+let pipeWidth = 64;
+let pipeHeight = 512;
+let pipeX = board.Width;
+let pipY = board.Height;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -26,9 +32,9 @@ window.onload = function() {
     board.width = boardWidth;
     context = board.getContext("2d") 
 
-    //draw flappy bird
-    context.fillstyle = "green";
-    context.fillRect(bird.x, bird.y,bird.width,bird.height);
+    //draw flappy bird && placeholder for variable
+    //context.fillstyle = "green";
+    //context.fillRect(bird.x, bird.y,bird.width,bird.height);
 
     //load img
     birdImg = new Image();
@@ -36,4 +42,38 @@ window.onload = function() {
     birdImg.onload = function() {
     context.drawImage(birdImg, bird.x.bird.y, bird.width, bird.height);
     }
+
+    topPipeImg = new Image();
+    topPipeImg.src = "./toppipe.png";
+
+    bottomPipeImg = new Image()
+    bottomPipeImg.src = "./bottompipe.png";
+
+
+    requestAnimationFrame(update);
+    setInterval(placePipes, 1500); //about 1.5 secs
 }
+    function update () {
+        requestAnimationFrame(update)
+        context.clearRect(0,0,board.width,board.height);
+
+        //bird
+        context.drawImage(birdImg,bird.x,bird.y,board.width,board.height);
+
+
+    }
+
+    function placePipes() {
+        
+        let topppie = {
+            img :  topPiprImg,
+            x :pipeX,
+            y: pipeArray,
+            width : pipeWidth,
+            height : pipeHeight,
+            passed :false
+        }
+        
+        
+
+    }
