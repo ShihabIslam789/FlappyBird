@@ -26,6 +26,17 @@ let pipeHeight = 512;
 let pipeX = board.Width;
 let pipY = board.Height;
 
+let topPipeImg;
+let bottomPipeImg;
+
+//physics
+let velocityX = -2; //pipes moving left
+let velocityY = 0; //bird jump speed
+let gravity = 0.4;
+
+let gameOver = false;
+let score = 0;
+
 window.onload = function() {
     board = document.getElementById("board");
     board.height = boardHeight;
@@ -59,7 +70,18 @@ window.onload = function() {
 
         //bird
         context.drawImage(birdImg,bird.x,bird.y,board.width,board.height);
-
+        
+        //pipes
+        for (let  i = 0; i < pipearray.length; i++) {
+            let pipe = pipeArray[i];
+            pipe.x += velocityX;
+            context.drawimage(pipe.img,pipe.x,pipe.y,pipe.width,pipe.height);
+            
+            if(!pipe.passed && bird.x > pipe.x + pipe.width){
+                score += 0.5; // 1 point for each 2 pipes crossed
+                pipe.passed = true;
+            }
+        }
 
     }
 
@@ -74,6 +96,6 @@ window.onload = function() {
             passed :false
         }
         
-        
+
 
     }
