@@ -24,7 +24,7 @@ let pipeArray = [];
 let pipeWidth = 64;
 let pipeHeight = 512;
 let pipeX = board.Width;
-let pipY = board.Height;
+let pipeY = 0;
 
 let topPipeImg;
 let bottomPipeImg;
@@ -49,9 +49,9 @@ window.onload = function() {
 
     //load img
     birdImg = new Image();
-    birdImg = "./flappybird.png";
+    birdImg.src = "./flappybird.png";
     birdImg.onload = function() {
-    context.drawImage(birdImg, bird.x.bird.y, bird.width, bird.height);
+        context.drawImage(birdImg, bird.x.bird.y, bird.width, bird.height);
     }
 
     topPipeImg = new Image();
@@ -66,12 +66,16 @@ window.onload = function() {
     document.addEventListener("keydown", moveBird);
 }
     function update () {
-        requestAnimationFrame(update)
+        requestAnimationFrame(update);
+        if (gameOver){
+            return;
+        }
         context.clearRect(0,0,board.width,board.height);
 
         //bird
         velocityY += gravity;
-        bird.y += velocityY;
+        //bird.y += velocityY;
+        bird.y = Math.max(bird.y + velocityY, 0) // stop bird from leaving screen
         context.drawImage(birdImg,bird.x,bird.y,board.width,board.height);
         
         //pipes
@@ -83,6 +87,10 @@ window.onload = function() {
             if(!pipe.passed && bird.x > pipe.x + pipe.width){
                 score += 0.5; // 1 point for each 2 pipes crossed
                 pipe.passed = true;
+            }
+
+            if (detectcollision(bird,pipe)) {
+                gameOver = true;
             }
         }
 
