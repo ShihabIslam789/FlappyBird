@@ -10,4 +10,4 @@ A simple game hosted on a website link found in the project files. <br>
  Your goal is to not get hit for as long as you can. <br>
 
 
- 
+ ![image](sample.PNG)
